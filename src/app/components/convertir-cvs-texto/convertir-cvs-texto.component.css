@@ -1,0 +1,113 @@
+
+
+.controls {
+display: flex;
+align-items: center;
+gap: 8px;
+flex-wrap: wrap;
+margin-bottom: 12px;
+}
+
+
+.preview {
+margin-top: 16px;
+}
+
+
+.table-wrapper {
+overflow-x: auto;
+max-height: 420px;
+}
+
+
+table {
+width: 100%;
+border-collapse: collapse;
+}
+
+
+/* th, td {
+padding: 6px 8px;
+border-bottom: 1px solid rgba(0,0,0,0.08);
+text-align: left;
+white-space: nowrap;
+}
+
+.file-input {
+  display: inline-block;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: 14px;
+} */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  background: #D7E3FF;
+  min-height: 100vh;
+}
+
+.card {
+  max-width: 900px;
+  width: 100%;
+  padding: 1.5rem;
+  background:#FAF9FD;
+  
+
+}
+
+.file-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.info-text {
+  text-align: center;
+  color: #555;
+  margin-top: 1rem;
+}
+
+.note {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.custom-title {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-weight: bold;
+  color: #3f51b5;
+}
+
+mat-card-header {
+  justify-content: center; 
+}
+
+mat-card-title {
+  text-align: center;
+  width: 100%;
+  font-weight: 600;
+}

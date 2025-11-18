@@ -1,0 +1,74 @@
+<div class="container">
+    <mat-card class="mx-auto p-4" style="max-width:1100px">
+        <mat-card-header>
+            <mat-card-title>Convertidor CSV → TXT (medidores)</mat-card-title>
+            <mat-card-subtitle>Agrega Mdd, KWh y Fecha y genera un .txt separado por tabulaciones</mat-card-subtitle>
+        </mat-card-header>
+
+         <br>
+        <mat-divider></mat-divider>
+        <br>
+        
+        <mat-card-content>
+            <!-- <div class="controls">
+                <input class="file-input" type="file" (change)="onFileSelected($event)" accept=".csv,.txt" />
+                
+                <mat-form-field appearance="outline" style="margin-left:12px; width:240px;">
+                    <mat-label>Nombre archivo salida</mat-label>
+                    <input matInput [(ngModel)]="outputFileName" />
+                </mat-form-field>
+            </div>
+            
+            <button mat-raised-button color="primary" (click)="generateTxt()" style="margin-left:12px;">Descargar TXT</button> -->
+
+                <div class="file-section">
+            <button mat-raised-button color="primary" (click)="fileInput.click()">
+              <mat-icon>upload_file</mat-icon>
+              Seleccionar archivo
+            </button>
+
+            <input
+              #fileInput
+              type="file"
+              accept=".txt,.csv"
+              hidden
+              (change)="onFileSelected($event)"
+            />
+      </div>
+
+      <div class="button-group" *ngIf="previewData.length > 0">
+        <button mat-raised-button color="warn" (click)="clearData()">
+          <mat-icon>delete</mat-icon>
+          Borrar datos
+        </button>
+
+        <button mat-raised-button color="accent" (click)="generateTxt()" *ngIf="rows">
+          <mat-icon>download</mat-icon>
+          Descargar TXT
+        </button>
+      </div>
+
+            
+            <h4>Previsualización (primeras {{previewLimit}} filas)</h4>
+            <div class="preview">
+                <div class="table-wrapper">
+                    <div *ngIf="rows && rows.length > 0; else noRows">
+                        <table mat-table [dataSource]="previewRows" class="mat-elevation-z1">
+                            <ng-container *ngFor="let h of getOrderedHeaders()" [matColumnDef]="h">
+                                <th mat-header-cell *matHeaderCellDef> {{h}} </th>
+                                <td mat-cell *matCellDef="let row"> {{row[h]}} </td>
+                            </ng-container>
+                            
+                            
+                            <tr mat-header-row *matHeaderRowDef="getOrderedHeaders()"></tr>
+                            <tr mat-row *matRowDef="let row; columns: getOrderedHeaders();"></tr>
+                        </table>
+                    </div>
+                </div>
+                <ng-template #noRows>
+                    <p>No hay datos. Cargá un CSV para ver la previsualización.</p>
+                </ng-template>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
