@@ -26,6 +26,9 @@
                 "input": "public"
               }
             ],
+            "allowedCommonJsDependencies": [
+            "papaparse"
+            ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"

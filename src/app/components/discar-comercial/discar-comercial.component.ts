@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import * as Papa from 'papaparse';
+import Papa from 'papaparse';
 import { FormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
@@ -80,7 +80,7 @@ export class DiscarComercialComponent {
       header: true,
       skipEmptyLines: true,
       worker: true,      // 🔥 Máximo rendimiento
-      complete: (results) => {
+      complete: (results: { data: any[]; }) => {
         this.rows = results.data as any[];
     
         // Normalizar fechas
@@ -98,7 +98,7 @@ export class DiscarComercialComponent {
         this.previewData = this.rows.slice(0, 5);
         this.applyFormulas();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error leyendo CSV:', err);
         alert('Error al leer el archivo CSV.');
       }
