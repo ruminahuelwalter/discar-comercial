@@ -66,12 +66,8 @@ export class DiscarComercialComponent {
   
 
 
-  // ---------------------------------------------------
-  // Cargar archivo
-  // ---------------------------------------------------
-
   onFileSelected(event: Event) {
-   
+    
 
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) return;
@@ -107,6 +103,7 @@ export class DiscarComercialComponent {
         alert('Error al leer el archivo CSV.');
       }
     });
+
   }
 
   suggestFileName(originalName: string) {
