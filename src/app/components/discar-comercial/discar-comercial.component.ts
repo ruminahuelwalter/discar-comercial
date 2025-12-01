@@ -134,58 +134,57 @@ export class DiscarComercialComponent {
   }
 
   normalizarFechaCompleta(valor: any): string {
-    if (valor === null || valor === undefined) return '';
-    const s = String(valor).trim();
+  if (valor === null || valor === undefined) return '';
+  const s = String(valor).trim();
 
-    // dd/mm/yyyy hh:mm
-    const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})\s+(\d{1,2}):(\d{2})/);
-    if (m) {
-      let [, d, mth, y, hh, mm] = m;
-      if (y.length === 2) y = '20' + y;
-      return `${+d}/${+mth}/${y} ${hh.padStart(2, '0')}:${mm}`;
-    }
+  const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})(?:\s+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?$/);
+  if (!m) return s;
 
-    // dd/mm/yyyy sin hora → 00:00
-    const m2 = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
-    if (m2) {
-      let [, d, mth, y] = m2;
-      if (y.length === 2) y = '20' + y;
-      return `${+d}/${+mth}/${y} 00:00`;
-    }
+  let [, d, mth, y, hh, mm, ss] = m;
 
-    // ISO → convertir
-    const iso = new Date(s.replace(' ', 'T'));
-    if (!isNaN(iso.getTime())) {
-      const dd = iso.getDate();
-      const mm = iso.getMonth() + 1;
-      const yyyy = iso.getFullYear();
-      const hh = String(iso.getHours()).padStart(2, '0');
-      const min = String(iso.getMinutes()).padStart(2, '0');
-      return `${dd}/${mm}/${yyyy} ${hh}:${min}`;
-    }
+  if (y.length === 2) y = '20' + y;
 
-    return s; // fallback
+  const dia = d.padStart(2, '0');
+  const mes = mth.padStart(2, '0');
+  const hora = hh ? hh.padStart(2, '0') : '00';
+  const minuto = mm ? mm.padStart(2, '0') : '00';
+
+  if (ss) {
+    const segundo = ss.padStart(2, '0');
+    return `${dia}/${mes}/${y} ${hora}:${minuto}:${segundo}`;
   }
+
+  return `${dia}/${mes}/${y} ${hora}:${minuto}`;
+}
+
 
   normalizarSoloFecha(valor: any): string {
-    if (!valor) return '';
-    const s = String(valor).trim();
-    const [fecha] = s.split(/\s+/);
+  if (!valor) return '';
+  const s = String(valor).trim();
+  const [fecha] = s.split(/\s+/);
 
-    const m = fecha.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
-    if (m) {
-      let [, d, mth, y] = m;
-      if (y.length === 2) y = '20' + y;
-      return `${+d}/${+mth}/${y}`;
-    }
+  const m = fecha.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+  if (m) {
+    let [, d, mth, y] = m;
+    if (y.length === 2) y = '20' + y;
 
-    const iso = new Date(s.replace(' ', 'T'));
-    if (!isNaN(iso.getTime())) {
-      return `${iso.getDate()}/${iso.getMonth() + 1}/${iso.getFullYear()}`;
-    }
+    const dia = d.padStart(2, '0');
+    const mes = mth.padStart(2, '0');
 
-    return fecha;
+    return `${dia}/${mes}/${y}`;
   }
+
+  const iso = new Date(s.replace(' ', 'T'));
+  if (!isNaN(iso.getTime())) {
+    const dia = String(iso.getDate()).padStart(2, '0');
+    const mes = String(iso.getMonth() + 1).padStart(2, '0');
+    const anio = iso.getFullYear();
+    return `${dia}/${mes}/${anio}`;
+  }
+
+  return fecha;
+}
+
 
   // ---------------------------------------------------
   // Fórmulas
